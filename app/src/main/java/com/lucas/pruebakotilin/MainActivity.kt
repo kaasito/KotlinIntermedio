@@ -2,7 +2,9 @@ package com.lucas.pruebakotilin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+typealias MyMapList =  MutableMap<Int, ArrayList<String>>
+typealias MyFun = (Int, String, MyMapList) -> Boolean
+typealias MyNestedClass = MyNestedAndInnerClass.MyNestedClass
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         //Visibility Modifiers
         visibilityModifiers()
 
+        //Data Classes
+        dataClasses()
+
+        //Type aliases
+        typeAliases()
     }
 
     //Enum Classes
@@ -56,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun nestedAndInnerClasses(){
         //Clase Anidada (nested)
-        val myNestedClass = MyNestedAndInnerClass.MyNestedClass()
+        val myNestedClass = MyNestedClass()
         val sum = myNestedClass.sum(1,2)
         println("El resultado de la suma es $sum")
 
@@ -94,6 +101,52 @@ class MainActivity : AppCompatActivity() {
         val visibility = Visibility()
         visibility.name = "Lucas"
         visibility.sayMyName()
+    }
+
+    //Data classes
+
+   private fun dataClasses(){
+
+    val lucas = Worker("Lucas", 21, "Programador")
+    lucas.lastWork = "Musico"
+    val ana = Worker()
+    val kasito = Worker("Lucas", 21, "Programador")
+
+
+    //equals & hashCode
+    if (lucas.equals(ana)){
+        print("Son iguales")
+    } else {
+        print("No son iguales")
+    }
+
+    /*
+    if (lucas == kasito){
+        print("Son iguales")
+    } else {
+        print("No son iguales")
+    }
+     */
+
+    //ToString
+    print(lucas.toString())
+
+    //copy
+    val lucas2 = lucas.copy(age = 23)
+
+    //ComponentM
+    val (name, age) = kasito
+    print(name)
+    print(age)
+    }
+
+   private var myMap:MyMapList = mutableMapOf()
+   private fun typeAliases(){
+        var myNewMap :MyMapList = mutableMapOf()
+       myNewMap[1] = arrayListOf("Lucas", "Romero")
+       myNewMap[2] = arrayListOf("Kasito", "On Spotify")
+
+       myMap = myNewMap
     }
 
 }
