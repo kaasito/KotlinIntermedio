@@ -12,8 +12,10 @@ class MainActivity : AppCompatActivity() {
 
         //Enum Classes
         enumClases()
+
         //Nested and Inner Classes
         nestedAndInnerClasses()
+
         //Class Inheritance
         classInheritance()
 
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         //Type aliases
         typeAliases()
+
+        //Destructuring declarations
+        destructurinDeclarations()
     }
 
     //Enum Classes
@@ -136,17 +141,45 @@ class MainActivity : AppCompatActivity() {
 
     //ComponentM
     val (name, age) = kasito
-    print(name)
-    print(age)
+        print(name)
+        print(age)
     }
 
+   //Type Aliases
    private var myMap:MyMapList = mutableMapOf()
    private fun typeAliases(){
-        var myNewMap :MyMapList = mutableMapOf()
+       var myNewMap :MyMapList = mutableMapOf()
        myNewMap[1] = arrayListOf("Lucas", "Romero")
        myNewMap[2] = arrayListOf("Kasito", "On Spotify")
 
        myMap = myNewMap
+    }
+
+   //Destructuring declarations
+
+   private fun destructurinDeclarations(){
+       val (name,_,work) = Worker("Lucas", 21, "Programador")
+       print("$name,$work")
+       val kasito = Worker("Kasito", 21, "Programador")
+       print(kasito.component1())
+
+       val (lucasName,lucasAge) = myWorker()
+       print("$lucasName,$lucasAge")
+
+       val myMap = mapOf(1 to "Lucas", 2 to "Ana", 3 to "Sara")
+       for (element in myMap){
+           print("${element.key}, ${element.value}")
+           print("${element.component1()}, ${element.component2()}")
+       }
+
+       for ((id, name) in myMap){
+           print("${id}, ${name}")
+       }
+
+   }
+
+    private fun myWorker(): Worker{
+        return Worker("Lucas", 21, "Programador")
     }
 
 }
