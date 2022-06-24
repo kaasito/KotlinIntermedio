@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
 
 typealias MyMapList =  MutableMap<Int, ArrayList<String>>
 typealias MyFun = (Int, String, MyMapList) -> Boolean
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
 
         //Extensions
         extensions()
+
+        //Lambda
+        lambda()
     }
 
     //Enum Classes
@@ -189,6 +193,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Estensions
+
     private fun extensions(){
         val myDate = Date()
         println(myDate.customFormat())
@@ -199,4 +204,47 @@ class MainActivity : AppCompatActivity() {
         println(myDateNulable.formatSize)
     }
 
+    private fun lambda(){
+       val myIntList = arrayListOf(1,2,3,4,5,6)
+       val myFilterIntList =  myIntList.filter { myInt ->
+           println(myInt)
+       if (myInt == 1){
+          return@filter true
+       }
+          myInt > 5
+       }
+       println(myFilterIntList)
+
+       val mySumFun = fun (x: Int, y:Int) : Int  =  x + y
+       val myMultiplyFun = fun (x: Int, y:Int) : Int  = x * y
+
+        myAsyncFun("Lucas"){
+            print(it)
+        }
+
+       myOperateFun(5,10,mySumFun)
+       myOperateFun(5,10) { x , y -> x - y }
+
+
+    }
+
+    private fun myOperateFun(x: Int, y: Int, myFun: (Int, Int) -> Int): Int {
+        return myFun(x,y)
+    }
+
+    private fun myAsyncFun(name:String, hello: (String) -> Unit){
+        val myNewString = "Hello $name"
+        thread{
+            Thread.sleep(5000)
+            hello(myNewString)
+        }
+        thread{
+            Thread.sleep(1000)
+            hello(myNewString)
+        }
+        thread{
+            Thread.sleep(7000)
+            hello(myNewString)
+        }
+    }
 }
