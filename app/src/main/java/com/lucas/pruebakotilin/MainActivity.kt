@@ -2,6 +2,9 @@ package com.lucas.pruebakotilin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import java.util.*
+import kotlin.collections.ArrayList
+
 typealias MyMapList =  MutableMap<Int, ArrayList<String>>
 typealias MyFun = (Int, String, MyMapList) -> Boolean
 typealias MyNestedClass = MyNestedAndInnerClass.MyNestedClass
@@ -33,6 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         //Destructuring declarations
         destructurinDeclarations()
+
+        //Extensions
+        extensions()
     }
 
     //Enum Classes
@@ -180,6 +186,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun myWorker(): Worker{
         return Worker("Lucas", 21, "Programador")
+    }
+
+    //Estensions
+    private fun extensions(){
+        val myDate = Date()
+        println(myDate.customFormat())
+        println(myDate.formatSize)
+
+        var myDateNulable: Date? = null
+        println(myDateNulable.customFormat())
+        println(myDateNulable.formatSize)
     }
 
 }
